@@ -1,0 +1,8 @@
+TYPE: Testing Tank
+HEALTH: 100
+SPEED: 5
+MIN_RANGE: 0
+MAX_RANGE: 10
+DAMAGE: 35
+AOE: 1
+DESC: A good all-rounder with good damage, range, and speed.

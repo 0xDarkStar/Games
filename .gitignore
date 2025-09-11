@@ -1,0 +1,4 @@
+.vscode
+minesweeper/__pycache__
+planes/plan.md
+planes/components/*.class

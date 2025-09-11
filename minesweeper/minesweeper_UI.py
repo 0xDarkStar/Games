@@ -54,6 +54,8 @@ gameboardState = [[[], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [
                   [[], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], []],
                   [[], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], []]]
 
+game_over = False
+
 def main():
     global timeLabel, completionLabel
     for i in range(len(gameboard)): # Go through entire gameboard
@@ -80,6 +82,7 @@ def main():
     mainWin.mainloop()
 
 def restart(gameboard, gameboardState, gameFrame):
+    global game_over
     for i in range(len(gameboard)):
         for ii in range(len(gameboard[i])):
             gameboard[i][ii] = "C"
@@ -90,6 +93,7 @@ def restart(gameboard, gameboardState, gameFrame):
     timeLabel.configure(text="00")
     timeLabel.after(1000, add_one_second)
     completionLabel.forget()
+    game_over = False
 
 def check_for_minute(time):
     index = 0
@@ -107,12 +111,13 @@ def check_for_minute(time):
     return time
 
 def add_one_second():
-    hiddenLeft = False
-    for i in gameboardState:
-        if "H" in i:
-            hiddenLeft = True
-            break
-    if hiddenLeft == False:
+    global game_over
+    for i in range(len(gameboardState)):
+        for ii in range(len(gameboard[i])):
+            if "S" == gameboardState[i][ii] and "💣" == gameboard[i][ii]:
+                game_over = True
+                break
+    if game_over:
         completionLabel.pack()
         return
     else:
